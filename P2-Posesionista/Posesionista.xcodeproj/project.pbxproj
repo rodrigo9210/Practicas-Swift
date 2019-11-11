@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5B113FEB237278160097081D /* FooterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B113FEA237278160097081D /* FooterTableViewCell.swift */; };
+		5B113FEF237A11050097081D /* default.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B113FEE237A11050097081D /* default.png */; };
 		5BE88CB223721BCD00F3DF74 /* EncabezadoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE88CB123721BCD00F3DF74 /* EncabezadoTableViewCell.swift */; };
 		5BE88CB4237247F400F3DF74 /* fondo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5BE88CB3237247F400F3DF74 /* fondo.jpg */; };
 		94E4741B2357DE5E0024E24C /* CosaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E4741A2357DE5E0024E24C /* CosaTableViewCell.swift */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		5B113FEA237278160097081D /* FooterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterTableViewCell.swift; sourceTree = "<group>"; };
+		5B113FEE237A11050097081D /* default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default.png; sourceTree = "<group>"; };
 		5BE88CB123721BCD00F3DF74 /* EncabezadoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncabezadoTableViewCell.swift; sourceTree = "<group>"; };
 		5BE88CB3237247F400F3DF74 /* fondo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fondo.jpg; sourceTree = "<group>"; };
 		94E4741A2357DE5E0024E24C /* CosaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosaTableViewCell.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				94E5B285234EB1990056E856 /* LaunchScreen.storyboard */,
 				94E5B288234EB1990056E856 /* Info.plist */,
 				5BE88CB3237247F400F3DF74 /* fondo.jpg */,
+				5B113FEE237A11050097081D /* default.png */,
 			);
 			path = Posesionista;
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 				94E5B284234EB1990056E856 /* Assets.xcassets in Resources */,
 				5BE88CB4237247F400F3DF74 /* fondo.jpg in Resources */,
 				94E5B282234EB1980056E856 /* Main.storyboard in Resources */,
+				5B113FEF237A11050097081D /* default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

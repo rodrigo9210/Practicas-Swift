@@ -12,6 +12,7 @@ class CosasTableViewController: UITableViewController {
 
     var miInventario : Inventario!
     let inventarioDeImagenes = InventarioDeImagenes()
+    var alerta : UIAlertController!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -302,38 +303,50 @@ class CosasTableViewController: UITableViewController {
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
-            var cosaABorrar : Cosa!
             
-            switch indexPath.section {
-            case 0:
-                cosaABorrar = self.miInventario.cosas0[indexPath.row]
-            case 1:
-                cosaABorrar = self.miInventario.cosas1[indexPath.row]
-            case 2:
-                cosaABorrar = self.miInventario.cosas2[indexPath.row]
-            case 3:
-                cosaABorrar = self.miInventario.cosas3[indexPath.row]
-            case 4:
-                cosaABorrar = self.miInventario.cosas4[indexPath.row]
-            case 5:
-                cosaABorrar = self.miInventario.cosas5[indexPath.row]
-            case 6:
-                cosaABorrar = self.miInventario.cosas6[indexPath.row]
-            case 7:
-                cosaABorrar = self.miInventario.cosas7[indexPath.row]
-            case 8:
-                cosaABorrar = self.miInventario.cosas8[indexPath.row]
-            case 9:
-                cosaABorrar = self.miInventario.cosas9[indexPath.row]
-            default:
-                print("error al borrar cosa")
-            }
+            //cong¡figura alerta
+            self.alerta = UIAlertController(title: "¿Seguro que quiere borrar?", message: "Confirma o cancela", preferredStyle: .alert)
             
-            miInventario.eliminaCosa(cosaAELiminar: cosaABorrar)
-            self.inventarioDeImagenes.borraImagen(paraLaLLave: cosaABorrar.llaveCosa)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            tableView.reloadData()
+            self.alerta.addAction(UIAlertAction(title:"OK", style: .default, handler:  { action in
+                // Delete the row from the data source
+                var cosaABorrar : Cosa!
+                
+                switch indexPath.section {
+                case 0:
+                    cosaABorrar = self.miInventario.cosas0[indexPath.row]
+                case 1:
+                    cosaABorrar = self.miInventario.cosas1[indexPath.row]
+                case 2:
+                    cosaABorrar = self.miInventario.cosas2[indexPath.row]
+                case 3:
+                    cosaABorrar = self.miInventario.cosas3[indexPath.row]
+                case 4:
+                    cosaABorrar = self.miInventario.cosas4[indexPath.row]
+                case 5:
+                    cosaABorrar = self.miInventario.cosas5[indexPath.row]
+                case 6:
+                    cosaABorrar = self.miInventario.cosas6[indexPath.row]
+                case 7:
+                    cosaABorrar = self.miInventario.cosas7[indexPath.row]
+                case 8:
+                    cosaABorrar = self.miInventario.cosas8[indexPath.row]
+                case 9:
+                    cosaABorrar = self.miInventario.cosas9[indexPath.row]
+                default:
+                    print("error al borrar cosa")
+                }
+                
+                self.miInventario.eliminaCosa(cosaAELiminar: cosaABorrar)
+                self.inventarioDeImagenes.borraImagen(paraLaLLave: cosaABorrar.llaveCosa)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+                tableView.reloadData()
+            }))
+            
+            self.alerta.addAction(UIAlertAction(title:"Cancelar", style: .default, handler: nil))
+            
+            self.present(self.alerta, animated: true, completion: nil)
+            
+            
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    

@@ -9,9 +9,6 @@
 import UIKit
 
 class FooterTableViewCell: UITableViewCell {
-
-    @IBOutlet var labelNumDeCosas: UILabel!
-    @IBOutlet var labelSumaPrecios: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

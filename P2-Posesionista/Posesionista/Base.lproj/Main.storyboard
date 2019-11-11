@@ -98,27 +98,7 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Faw-Ds-CG9" id="JCt-a9-zCj">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="74.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4KH-3D-Kd8">
-                                            <rect key="frame" x="20" y="27" width="42" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P7C-Wg-WD1">
-                                            <rect key="frame" x="352" y="27" width="42" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="labelNumDeCosas" destination="4KH-3D-Kd8" id="rqn-YE-1LN"/>
-                                    <outlet property="labelSumaPrecios" destination="P7C-Wg-WD1" id="k65-j5-z32"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -163,6 +143,9 @@
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <action selector="edicionNombre:" destination="jzC-RE-hNX" eventType="editingChanged" id="2Qm-vo-DKT"/>
+                                                </connections>
                                             </textField>
                                         </subviews>
                                     </stackView>
@@ -179,7 +162,10 @@
                                                 <rect key="frame" x="74.5" y="0.0" width="299.5" height="22"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <action selector="edicionSerie:" destination="jzC-RE-hNX" eventType="editingChanged" id="h6O-wE-fdX"/>
+                                                </connections>
                                             </textField>
                                         </subviews>
                                     </stackView>
@@ -197,6 +183,9 @@
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <action selector="edicionPrecio:" destination="jzC-RE-hNX" eventType="editingChanged" id="czy-4V-AYm"/>
+                                                </connections>
                                             </textField>
                                         </subviews>
                                     </stackView>
@@ -219,6 +208,9 @@
                             </stackView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GPp-GO-sZd">
                                 <rect key="frame" x="20" y="813" width="374" height="49"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="49" id="huQ-Zk-7sf"/>
+                                </constraints>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="OKo-Tu-0ry"/>
                                     <barButtonItem systemItem="camera" id="KhL-7s-iyV">

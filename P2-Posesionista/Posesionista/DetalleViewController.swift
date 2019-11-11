@@ -12,10 +12,14 @@ class DetalleViewController: UIViewController, UITextFieldDelegate, UIImagePicke
 
     
     @IBOutlet weak var campoNombre: UITextField!
+    var nombreVacio = false
     @IBOutlet weak var campoSerie: UITextField!
+    var serieVacio = false
     @IBOutlet weak var campoPrecio: UITextField!
+    var precioVacio = false
     @IBOutlet weak var labelFecha: UILabel!
     @IBOutlet weak var foto: UIImageView!
+    var alerta : UIAlertController!
     
     
     var cosaADetallar: Cosa! {
@@ -51,6 +55,17 @@ class DetalleViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         self.campoPrecio.text = formatoDePrecio.string(from: NSNumber(value: self.cosaADetallar.valorEnPesos))
         self.labelFecha.text = formatoDeFecha.string(from: cosaADetallar.fechaDeCreacion)
         self.foto.image = self.inventarioDeImagenes.getImagen(paraLaLLave: cosaADetallar.llaveCosa)
+        
+        if self.foto.image == nil {
+            self.foto.image = UIImage(named: "default.png")
+        }
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didTap))
+        self.view.addGestureRecognizer(tap)
+    }
+    
+    @objc func didTap() {
+        self.view.endEditing(true)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -58,42 +73,80 @@ class DetalleViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         return true
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        cosaADetallar.nombre = self.campoNombre.text ?? ""
-        cosaADetallar.numeroDeSerie = self.campoSerie.text ?? ""
-        if let valor = campoPrecio.text, let valorInt = formatoDePrecio.number(from: valor) {
-            cosaADetallar.valorEnPesos = valorInt.intValue
-            
-            switch valorInt.intValue {
-            case 0..<100:
-                cosaADetallar.seccion = 0
-            case 100..<200:
-                cosaADetallar.seccion = 1
-            case 200..<300:
-                cosaADetallar.seccion = 2
-            case 300..<400:
-                cosaADetallar.seccion = 3
-            case 400..<500:
-                cosaADetallar.seccion = 4
-            case 500..<600:
-                cosaADetallar.seccion = 5
-            case 600..<700:
-                cosaADetallar.seccion = 6
-            case 700..<800:
-                cosaADetallar.seccion = 7
-            case 800..<900:
-                cosaADetallar.seccion = 8
-            case 900..<1001:
-                cosaADetallar.seccion = 9
-            default:
-                print("Esto no pasa")
-            }
-            
+    
+    @IBAction func edicionNombre(_ sender: Any) {
+        if (self.campoNombre.text?.isEmpty ?? true) || (self.campoSerie.text?.isEmpty ?? true) || (self.campoPrecio.text?.isEmpty ?? true) {
+            navigationController?.navigationBar.isUserInteractionEnabled = false
+            navigationController?.navigationBar.tintColor = .lightGray
         } else {
-            cosaADetallar.valorEnPesos = 0
-            cosaADetallar.seccion = 0
+            navigationController?.navigationBar.isUserInteractionEnabled = true
+            navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.2588235294, green: 0.5215686275, blue: 0.9568627451, alpha: 1)
         }
+    }
+    
+    @IBAction func edicionSerie(_ sender: Any) {
+        if (self.campoNombre.text?.isEmpty ?? true) || (self.campoSerie.text?.isEmpty ?? true) || (self.campoPrecio.text?.isEmpty ?? true) {
+            navigationController?.navigationBar.isUserInteractionEnabled = false
+            navigationController?.navigationBar.tintColor = .lightGray
+        } else {
+            navigationController?.navigationBar.isUserInteractionEnabled = true
+            navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.2588235294, green: 0.5215686275, blue: 0.9568627451, alpha: 1)
+        }
+    }
+    
+    @IBAction func edicionPrecio(_ sender: Any) {
+        if (self.campoNombre.text?.isEmpty ?? true) || (self.campoSerie.text?.isEmpty ?? true) || (self.campoPrecio.text?.isEmpty ?? true) {
+            navigationController?.navigationBar.isUserInteractionEnabled = false
+            navigationController?.navigationBar.tintColor = .lightGray
+        } else {
+            navigationController?.navigationBar.isUserInteractionEnabled = true
+            navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.2588235294, green: 0.5215686275, blue: 0.9568627451, alpha: 1)
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        
+            super.viewWillDisappear(animated)
+            cosaADetallar.nombre = self.campoNombre.text ?? ""
+            cosaADetallar.numeroDeSerie = self.campoSerie.text ?? ""
+            if let valor = campoPrecio.text, let valorInt = formatoDePrecio.number(from: valor) {
+                cosaADetallar.valorEnPesos = valorInt.intValue
+                
+                if valorInt.intValue < 1001 {
+                    switch valorInt.intValue {
+                    case 0..<100:
+                        cosaADetallar.seccion = 0
+                    case 100..<200:
+                        cosaADetallar.seccion = 1
+                    case 200..<300:
+                        cosaADetallar.seccion = 2
+                    case 300..<400:
+                        cosaADetallar.seccion = 3
+                    case 400..<500:
+                        cosaADetallar.seccion = 4
+                    case 500..<600:
+                        cosaADetallar.seccion = 5
+                    case 600..<700:
+                        cosaADetallar.seccion = 6
+                    case 700..<800:
+                        cosaADetallar.seccion = 7
+                    case 800..<900:
+                        cosaADetallar.seccion = 8
+                    case 900..<1001:
+                        cosaADetallar.seccion = 9
+                    default:
+                        print("Esto no pasa")
+                    }
+                } else {
+                    cosaADetallar.valorEnPesos = 0
+                    cosaADetallar.seccion = 0
+                }
+                
+            } else {
+                cosaADetallar.valorEnPesos = 0
+                cosaADetallar.seccion = 0
+            }
+//        }
     }
     
     @IBAction func tomaFoto(_ sender: UIBarButtonItem) {
