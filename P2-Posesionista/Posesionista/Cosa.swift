@@ -14,8 +14,9 @@ class Cosa : NSObject, NSCoding {
     var valorEnPesos : Int
     var numeroDeSerie : String?
     var seccion: Int
-    let fechaDeCreacion : Date
+    var fechaDeCreacion : Date
     let llaveCosa : String
+    let llaveCosaT : String
     
     func encode(with aCoder: NSCoder) {
         aCoder.encode(self.nombre, forKey: "nombre")
@@ -23,6 +24,7 @@ class Cosa : NSObject, NSCoding {
         aCoder.encode(self.numeroDeSerie, forKey: "numeroDeSerie")
         aCoder.encode(self.fechaDeCreacion, forKey: "fechaDeCreacion")
         aCoder.encode(self.llaveCosa, forKey: "llaveCosa")
+        aCoder.encode(self.llaveCosa, forKey: "llaveCosaT")
         aCoder.encode(self.seccion, forKey: "seccion")
     }
     
@@ -32,6 +34,7 @@ class Cosa : NSObject, NSCoding {
         self.numeroDeSerie = aDecoder.decodeObject(forKey: "numeroDeSerie") as! String?
         self.fechaDeCreacion = aDecoder.decodeObject(forKey: "fechaDeCreacion") as! Date
         self.llaveCosa = aDecoder.decodeObject(forKey: "llaveCosa") as! String
+        self.llaveCosaT = aDecoder.decodeObject(forKey: "llaveCosaT") as! String
         self.seccion = aDecoder.decodeInteger(forKey: "seccion")
         super.init()
     }
@@ -42,6 +45,7 @@ class Cosa : NSObject, NSCoding {
         self.numeroDeSerie = serie
         self.fechaDeCreacion = alta
         self.llaveCosa = UUID().uuidString
+        self.llaveCosaT = UUID().uuidString
         self.seccion = seccion
         super.init()
     }

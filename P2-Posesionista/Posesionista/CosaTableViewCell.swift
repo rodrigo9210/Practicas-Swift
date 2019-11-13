@@ -13,8 +13,7 @@ class CosaTableViewCell: UITableViewCell {
     @IBOutlet weak var labelDeNombre: UILabel!
     @IBOutlet weak var labelDeSerie: UILabel!
     @IBOutlet weak var labelDePrecio: UILabel!
-    
-    
+    @IBOutlet weak var thumbnail: UIImageView!
     
     
     override func awakeFromNib() {

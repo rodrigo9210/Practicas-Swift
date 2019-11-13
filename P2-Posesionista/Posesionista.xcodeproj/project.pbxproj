@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B04BE5D237A5EE6000A276F /* InventarioDeThumbnails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B04BE5C237A5EE6000A276F /* InventarioDeThumbnails.swift */; };
+		5B04BE5F237A6191000A276F /* Extensiones.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B04BE5E237A6191000A276F /* Extensiones.swift */; };
 		5B113FEB237278160097081D /* FooterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B113FEA237278160097081D /* FooterTableViewCell.swift */; };
 		5B113FEF237A11050097081D /* default.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B113FEE237A11050097081D /* default.png */; };
+		5B11402D237A2BF10097081D /* FechaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B11402C237A2BF10097081D /* FechaViewController.swift */; };
 		5BE88CB223721BCD00F3DF74 /* EncabezadoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE88CB123721BCD00F3DF74 /* EncabezadoTableViewCell.swift */; };
 		5BE88CB4237247F400F3DF74 /* fondo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5BE88CB3237247F400F3DF74 /* fondo.jpg */; };
 		94E4741B2357DE5E0024E24C /* CosaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E4741A2357DE5E0024E24C /* CosaTableViewCell.swift */; };
@@ -43,8 +46,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5B04BE5C237A5EE6000A276F /* InventarioDeThumbnails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventarioDeThumbnails.swift; sourceTree = "<group>"; };
+		5B04BE5E237A6191000A276F /* Extensiones.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensiones.swift; sourceTree = "<group>"; };
 		5B113FEA237278160097081D /* FooterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterTableViewCell.swift; sourceTree = "<group>"; };
 		5B113FEE237A11050097081D /* default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default.png; sourceTree = "<group>"; };
+		5B11402C237A2BF10097081D /* FechaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FechaViewController.swift; sourceTree = "<group>"; };
 		5BE88CB123721BCD00F3DF74 /* EncabezadoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncabezadoTableViewCell.swift; sourceTree = "<group>"; };
 		5BE88CB3237247F400F3DF74 /* fondo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fondo.jpg; sourceTree = "<group>"; };
 		94E4741A2357DE5E0024E24C /* CosaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosaTableViewCell.swift; sourceTree = "<group>"; };
@@ -116,6 +122,8 @@
 			isa = PBXGroup;
 			children = (
 				94E5B280234EB1980056E856 /* Main.storyboard */,
+				5B04BE5E237A6191000A276F /* Extensiones.swift */,
+				5B11402C237A2BF10097081D /* FechaViewController.swift */,
 				94E5B27C234EB1980056E856 /* AppDelegate.swift */,
 				94E5B2AE234EB72F0056E856 /* CosasTableViewController.swift */,
 				94E4741C2357EB6B0024E24C /* DetalleViewController.swift */,
@@ -125,6 +133,7 @@
 				94E5B2AA234EB1D30056E856 /* Cosa.swift */,
 				94E5B2AC234EB5F90056E856 /* Inventario.swift */,
 				94E9EA3B23611C17002272FE /* InventarioDeImagenes.swift */,
+				5B04BE5C237A5EE6000A276F /* InventarioDeThumbnails.swift */,
 				94E5B283234EB1990056E856 /* Assets.xcassets */,
 				94E5B285234EB1990056E856 /* LaunchScreen.storyboard */,
 				94E5B288234EB1990056E856 /* Info.plist */,
@@ -285,13 +294,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B04BE5D237A5EE6000A276F /* InventarioDeThumbnails.swift in Sources */,
 				94E9EA3C23611C17002272FE /* InventarioDeImagenes.swift in Sources */,
 				94E4741D2357EB6B0024E24C /* DetalleViewController.swift in Sources */,
 				94E4741B2357DE5E0024E24C /* CosaTableViewCell.swift in Sources */,
 				94E5B2AB234EB1D30056E856 /* Cosa.swift in Sources */,
 				94E5B2AF234EB72F0056E856 /* CosasTableViewController.swift in Sources */,
 				94E5B2AD234EB5F90056E856 /* Inventario.swift in Sources */,
+				5B11402D237A2BF10097081D /* FechaViewController.swift in Sources */,
 				94E5B27D234EB1980056E856 /* AppDelegate.swift in Sources */,
+				5B04BE5F237A6191000A276F /* Extensiones.swift in Sources */,
 				5B113FEB237278160097081D /* FooterTableViewCell.swift in Sources */,
 				5BE88CB223721BCD00F3DF74 /* EncabezadoTableViewCell.swift in Sources */,
 			);

@@ -12,6 +12,7 @@ class CosasTableViewController: UITableViewController {
 
     var miInventario : Inventario!
     let inventarioDeImagenes = InventarioDeImagenes()
+    let inventarioDeThumbNails = InventarioDeThumbnails()
     var alerta : UIAlertController!
     
     required init?(coder aDecoder: NSCoder) {
@@ -224,6 +225,14 @@ class CosasTableViewController: UITableViewController {
             print("error al cargar celdas")
         }
         
+        cell.thumbnail.image = self.inventarioDeThumbNails.getThumb(paraLaLLave: item.llaveCosa)
+        
+        if cell.thumbnail.image == nil {
+            var temp = UIImage(named: "default.png")
+            temp = UIImage.resize(image: temp!, targetSize: CGSize(width: 52, height: 52))
+            cell.thumbnail.image = temp
+        }
+        
         cell.labelDeNombre.text = item.nombre
         cell.labelDePrecio.text = "$\(item.valorEnPesos)"
         cell.labelDeSerie.text = item.numeroDeSerie
@@ -305,9 +314,9 @@ class CosasTableViewController: UITableViewController {
         if editingStyle == .delete {
             
             //cong¡figura alerta
-            self.alerta = UIAlertController(title: "¿Seguro que quiere borrar?", message: "Confirma o cancela", preferredStyle: .alert)
+            self.alerta = UIAlertController(title: "¿Seguro que quieres borrar?", message: "Confirma o cancela", preferredStyle: .alert)
             
-            self.alerta.addAction(UIAlertAction(title:"OK", style: .default, handler:  { action in
+            self.alerta.addAction(UIAlertAction(title:"Confirmar", style: .default, handler:  { action in
                 // Delete the row from the data source
                 var cosaABorrar : Cosa!
                 
@@ -338,6 +347,7 @@ class CosasTableViewController: UITableViewController {
                 
                 self.miInventario.eliminaCosa(cosaAELiminar: cosaABorrar)
                 self.inventarioDeImagenes.borraImagen(paraLaLLave: cosaABorrar.llaveCosa)
+                self.inventarioDeThumbNails.borraThumb(paraLaLLave: cosaABorrar.llaveCosaT)
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 tableView.reloadData()
             }))
@@ -411,6 +421,7 @@ class CosasTableViewController: UITableViewController {
                 }
                 
                 detalleVC.inventarioDeImagenes = self.inventarioDeImagenes
+                detalleVC.inventarioDeThumbNail = self.inventarioDeThumbNails
             }
         }
     }

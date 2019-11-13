@@ -10,7 +10,6 @@ import UIKit
 
 class DetalleViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    
     @IBOutlet weak var campoNombre: UITextField!
     var nombreVacio = false
     @IBOutlet weak var campoSerie: UITextField!
@@ -20,7 +19,7 @@ class DetalleViewController: UIViewController, UITextFieldDelegate, UIImagePicke
     @IBOutlet weak var labelFecha: UILabel!
     @IBOutlet weak var foto: UIImageView!
     var alerta : UIAlertController!
-    
+    @IBOutlet var botonBorrarFoto: UIBarButtonItem!
     
     var cosaADetallar: Cosa! {
         didSet { //Property Observer
@@ -30,7 +29,6 @@ class DetalleViewController: UIViewController, UITextFieldDelegate, UIImagePicke
     let formatoDeFecha : DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
-        formatter.timeStyle = .short
         return formatter
     } ()
     
@@ -41,9 +39,11 @@ class DetalleViewController: UIViewController, UITextFieldDelegate, UIImagePicke
     } ()
     
     var inventarioDeImagenes : InventarioDeImagenes!
+    var inventarioDeThumbNail : InventarioDeThumbnails!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.delegate = self
         self.campoNombre.delegate = self
         self.campoPrecio.delegate = self
         self.campoPrecio.keyboardType = UIKeyboardType.numberPad
@@ -58,10 +58,16 @@ class DetalleViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         
         if self.foto.image == nil {
             self.foto.image = UIImage(named: "default.png")
+            self.botonBorrarFoto.isEnabled = false
+            self.botonBorrarFoto.tintColor = .clear
         }
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTap))
         self.view.addGestureRecognizer(tap)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.labelFecha.text = formatoDeFecha.string(from: cosaADetallar.fechaDeCreacion)
     }
     
     @objc func didTap() {
@@ -78,7 +84,12 @@ class DetalleViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         if (self.campoNombre.text?.isEmpty ?? true) || (self.campoSerie.text?.isEmpty ?? true) || (self.campoPrecio.text?.isEmpty ?? true) {
             navigationController?.navigationBar.isUserInteractionEnabled = false
             navigationController?.navigationBar.tintColor = .lightGray
-        } else {
+            
+            self.alerta = UIAlertController(title: "No puedes dejar campos vacíos.", message: "", preferredStyle: .alert)
+            
+            self.alerta.addAction(UIAlertAction(title:"OK", style: .default, handler: nil))
+            
+            self.present(self.alerta, animated: true, completion: nil)
             navigationController?.navigationBar.isUserInteractionEnabled = true
             navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.2588235294, green: 0.5215686275, blue: 0.9568627451, alpha: 1)
         }
@@ -88,6 +99,12 @@ class DetalleViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         if (self.campoNombre.text?.isEmpty ?? true) || (self.campoSerie.text?.isEmpty ?? true) || (self.campoPrecio.text?.isEmpty ?? true) {
             navigationController?.navigationBar.isUserInteractionEnabled = false
             navigationController?.navigationBar.tintColor = .lightGray
+            
+            self.alerta = UIAlertController(title: "No puedes dejar campos vacíos.", message: "", preferredStyle: .alert)
+            
+            self.alerta.addAction(UIAlertAction(title:"OK", style: .default, handler: nil))
+            
+            self.present(self.alerta, animated: true, completion: nil)
         } else {
             navigationController?.navigationBar.isUserInteractionEnabled = true
             navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.2588235294, green: 0.5215686275, blue: 0.9568627451, alpha: 1)
@@ -98,6 +115,12 @@ class DetalleViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         if (self.campoNombre.text?.isEmpty ?? true) || (self.campoSerie.text?.isEmpty ?? true) || (self.campoPrecio.text?.isEmpty ?? true) {
             navigationController?.navigationBar.isUserInteractionEnabled = false
             navigationController?.navigationBar.tintColor = .lightGray
+            
+            self.alerta = UIAlertController(title: "No puedes dejar campos vacíos.", message: "", preferredStyle: .alert)
+            
+            self.alerta.addAction(UIAlertAction(title:"OK", style: .default, handler: nil))
+            
+            self.present(self.alerta, animated: true, completion: nil)
         } else {
             navigationController?.navigationBar.isUserInteractionEnabled = true
             navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.2588235294, green: 0.5215686275, blue: 0.9568627451, alpha: 1)
@@ -161,21 +184,29 @@ class DetalleViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         present(picker, animated: true, completion: nil)
     }
     
+    @IBAction func borraFoto(_ sender: UIBarButtonItem) {
+        self.foto.image = UIImage(named: "default.png")
+        self.botonBorrarFoto.isEnabled = false
+        self.botonBorrarFoto.tintColor = .clear
+        self.inventarioDeImagenes.borraImagen(paraLaLLave: cosaADetallar.llaveCosa)
+        self.inventarioDeThumbNail.borraThumb(paraLaLLave: cosaADetallar.llaveCosaT)
+    }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let imagen = info[.originalImage] as! UIImage
         self.foto.image = imagen
         self.inventarioDeImagenes.setImagen(imagen: imagen, paraLaLLave: cosaADetallar.llaveCosa)
+        self.inventarioDeThumbNail.setThumbnail(thumb: imagen, paraLaLLave: cosaADetallar.llaveCosaT)
         dismiss(animated: true, completion: nil)
+        self.botonBorrarFoto.isEnabled = true
+        self.botonBorrarFoto.tintColor  = #colorLiteral(red: 0.2588235294, green: 0.5215686275, blue: 0.9568627451, alpha: 1)
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "fecha" {
+                let fechaVC = segue.destination as! FechaViewController
+                fechaVC.cosaADetallar = self.cosaADetallar
+        }
     }
-    */
 
 }
