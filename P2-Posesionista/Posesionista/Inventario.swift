@@ -32,8 +32,8 @@ class Inventario {
                 let cosasGuardadas = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data)
                 self.todasLasCosas = cosasGuardadas as! [Cosa]
                 
-                for cosa in todasLasCosas{
-                    switch cosa.seccion {
+                for cosa in todasLasCosas{ // revisa todas las cosas del inventario
+                    switch cosa.seccion { // dependiendo de su seccion los envia al arreglo correspondiente
                     case 0:
                         self.cosas0.append(cosa)
                     case 1:
@@ -71,7 +71,7 @@ class Inventario {
         let cosa = Cosa()
         self.todasLasCosas.append(cosa)
         
-        switch cosa.seccion {
+        switch cosa.seccion { //dependiendo de la seccion de la cosa agregala a al arreglo correspondiente
         case 0:
             self.cosas0.append(cosa)
             return cosas0.last!
@@ -112,7 +112,7 @@ class Inventario {
     
     func eliminaCosa(cosaAELiminar: Cosa){
         
-        switch cosaAELiminar.seccion {
+        switch cosaAELiminar.seccion { //dependiendo de la seccion de la cosa la elimina del arreglo correspondiente
         case 0:
             if let indiceDeCosa = self.cosas0.firstIndex(of: cosaAELiminar) {
                 cosas0.remove(at: indiceDeCosa)
@@ -157,7 +157,7 @@ class Inventario {
             print("error al eliminar cosa en inventario")
         }
         
-        if let indiceDeCosa = todasLasCosas.firstIndex(of: cosaAELiminar) {
+        if let indiceDeCosa = todasLasCosas.firstIndex(of: cosaAELiminar) { // y la elimina del arreglo que tiene todo
             todasLasCosas.remove(at: indiceDeCosa)
         }
         
@@ -231,13 +231,14 @@ class Inventario {
         return false
     }
     
+    //verifica todas las secciones de todas las cosas para reordenarlas
     func verificaSeccionCosa() {
         
         var i = 0
         
-        while i < cosas0.count {
+        while i < cosas0.count { // revisa todas las cosas de una seccion
             if cosas0[i].seccion != 0 {
-                switch cosas0[i].seccion {
+                switch cosas0[i].seccion { // si si atributo seccion no es el que deberia lo agrega a la seccion debida
                 case 1:
                     cosas1.append(cosas0[i])
                 case 2:
@@ -259,7 +260,7 @@ class Inventario {
                 default:
                     print("error al reordenar")
                 }
-                cosas0.remove(at: i)
+                cosas0.remove(at: i) // y lo elimina en la que no deberia estar
             }
             i += 1
         } // for cosas0

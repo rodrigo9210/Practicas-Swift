@@ -10,26 +10,27 @@ import Foundation
 import UIKit
 
 extension UIImage {
+    //toma una imagen y un tamaño objetivo para entregar una copia de la imagen con otro tamaño
     class func resize(image: UIImage, targetSize: CGSize) -> UIImage {
-        let size = image.size
+        let tam = image.size
         
         let widthRatio  = targetSize.width  / image.size.width
         let heightRatio = targetSize.height / image.size.height
         
-        var newSize: CGSize
+        var nuevoTam: CGSize
         if widthRatio > heightRatio {
-            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+            nuevoTam = CGSize(width: tam.width * heightRatio, height: tam.height * heightRatio)
         } else {
-            newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
+            nuevoTam = CGSize(width: tam.width * widthRatio,  height: tam.height * widthRatio)
         }
         
-        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
+        let rect = CGRect(x: 0, y: 0, width: nuevoTam.width, height: nuevoTam.height)
         
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 0)
+        UIGraphicsBeginImageContextWithOptions(nuevoTam, false, 0)
         image.draw(in: rect)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        let nuevaImagen = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        return newImage!
+        return nuevaImagen!
     }
 }

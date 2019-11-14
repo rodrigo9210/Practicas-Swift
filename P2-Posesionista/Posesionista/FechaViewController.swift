@@ -20,19 +20,21 @@ class FechaViewController: UIViewController, UINavigationControllerDelegate{
         return formatter
     } ()
     
+    //toma el valor de la cosa y lo pone en el titulo
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.delegate = self
         navigationItem.title = formatoDeFecha.string(from: cosaADetallar.fechaDeCreacion)
-        self.pickerFecha.maximumDate = Date()
+        self.pickerFecha.maximumDate = Date() //impide fechas futuras
     }
     
+    //revisa cambios en el picker de fecha
     @IBAction func cambiaFecha(_ sender: UIDatePicker) {
         cosaADetallar.fechaDeCreacion = self.pickerFecha.date
         print("\(formatoDeFecha.string(from: cosaADetallar.fechaDeCreacion))")
     }
     
-    
+    //asigna la fecha de creacion antes de que la vista desaparezca
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         cosaADetallar.fechaDeCreacion = self.pickerFecha.date

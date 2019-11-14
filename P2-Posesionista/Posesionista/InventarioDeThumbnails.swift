@@ -15,8 +15,7 @@ class InventarioDeThumbnails {
     func setThumbnail(thumb: UIImage, paraLaLLave llave: String){
         cache.setObject(thumb, forKey: llave as NSString)
         let url = urlDeThumbEnDisco(paraLlave: llave)
-        let thum = UIImage.resize(image: thumb, targetSize: CGSize(width: 52, height: 52))
-        if let data = thum.jpegData(compressionQuality: 0.5) {
+        if let data = thumb.jpegData(compressionQuality: 0.5) {
             try? data.write(to: url, options: [.atomic])
         }
     }

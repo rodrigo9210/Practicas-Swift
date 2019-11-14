@@ -225,7 +225,7 @@ class CosasTableViewController: UITableViewController {
             print("error al cargar celdas")
         }
         
-        cell.thumbnail.image = self.inventarioDeThumbNails.getThumb(paraLaLLave: item.llaveCosa)
+        cell.thumbnail.image = self.inventarioDeThumbNails.getThumb(paraLaLLave: item.llaveCosaT)
         
         if cell.thumbnail.image == nil {
             var temp = UIImage(named: "default.png")
@@ -236,6 +236,9 @@ class CosasTableViewController: UITableViewController {
         cell.labelDeNombre.text = item.nombre
         cell.labelDePrecio.text = "$\(item.valorEnPesos)"
         cell.labelDeSerie.text = item.numeroDeSerie
+        
+        
+        
 //        cell.textLabel?.text = item.nombre
 //        cell.detailTextLabel?.text = "$\(item.valorEnPesos)"
         
@@ -309,7 +312,7 @@ class CosasTableViewController: UITableViewController {
     */
 
     
-    // Override to support editing the table view.
+    // funcion para eliminar celda que envia alerta de confirmacion
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             
@@ -362,6 +365,7 @@ class CosasTableViewController: UITableViewController {
         }    
     }
     
+    //cambia el texto del boton delete
     override func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         return "Eliminar"
     }
@@ -384,6 +388,7 @@ class CosasTableViewController: UITableViewController {
     }
     */
     
+    //asigna titulos de la barra scroll
     override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         return ["00","100","200","300","400","500","600","700","800","900"]
     }

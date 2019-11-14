@@ -79,7 +79,7 @@ class DetalleViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         return true
     }
     
-    
+    //revisa cambios mientras se edita el campo nombre
     @IBAction func edicionNombre(_ sender: Any) {
         if (self.campoNombre.text?.isEmpty ?? true) || (self.campoSerie.text?.isEmpty ?? true) || (self.campoPrecio.text?.isEmpty ?? true) {
             navigationController?.navigationBar.isUserInteractionEnabled = false
@@ -95,6 +95,7 @@ class DetalleViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         }
     }
     
+    //revisa cambios mientras se edita el campo serie
     @IBAction func edicionSerie(_ sender: Any) {
         if (self.campoNombre.text?.isEmpty ?? true) || (self.campoSerie.text?.isEmpty ?? true) || (self.campoPrecio.text?.isEmpty ?? true) {
             navigationController?.navigationBar.isUserInteractionEnabled = false
@@ -111,6 +112,7 @@ class DetalleViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         }
     }
     
+    //revisa cambios mientras se edita el campo de precio
     @IBAction func edicionPrecio(_ sender: Any) {
         if (self.campoNombre.text?.isEmpty ?? true) || (self.campoSerie.text?.isEmpty ?? true) || (self.campoPrecio.text?.isEmpty ?? true) {
             navigationController?.navigationBar.isUserInteractionEnabled = false
@@ -135,6 +137,7 @@ class DetalleViewController: UIViewController, UITextFieldDelegate, UIImagePicke
             if let valor = campoPrecio.text, let valorInt = formatoDePrecio.number(from: valor) {
                 cosaADetallar.valorEnPesos = valorInt.intValue
                 
+                //si el nuevo valor es menor que 1001 es valido
                 if valorInt.intValue < 1001 {
                     switch valorInt.intValue {
                     case 0..<100:
@@ -160,12 +163,12 @@ class DetalleViewController: UIViewController, UITextFieldDelegate, UIImagePicke
                     default:
                         print("Esto no pasa")
                     }
-                } else {
+                } else { // si no es inyValue lo manda a la secion de ceros
                     cosaADetallar.valorEnPesos = 0
                     cosaADetallar.seccion = 0
                 }
                 
-            } else {
+            } else { // si es mayor lo envia a la seccion de ceros
                 cosaADetallar.valorEnPesos = 0
                 cosaADetallar.seccion = 0
             }
@@ -184,6 +187,7 @@ class DetalleViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         present(picker, animated: true, completion: nil)
     }
     
+    //borra foto y thumbnail
     @IBAction func borraFoto(_ sender: UIBarButtonItem) {
         self.foto.image = UIImage(named: "default.png")
         self.botonBorrarFoto.isEnabled = false
@@ -192,11 +196,14 @@ class DetalleViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         self.inventarioDeThumbNail.borraThumb(paraLaLLave: cosaADetallar.llaveCosaT)
     }
     
+    //asigna archivo a foto y thumbnail
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let imagen = info[.originalImage] as! UIImage
+        var thumb = info[.originalImage] as! UIImage
+        thumb = UIImage.resize(image: thumb, targetSize: CGSize(width: 52, height: 52))
         self.foto.image = imagen
         self.inventarioDeImagenes.setImagen(imagen: imagen, paraLaLLave: cosaADetallar.llaveCosa)
-        self.inventarioDeThumbNail.setThumbnail(thumb: imagen, paraLaLLave: cosaADetallar.llaveCosaT)
+        self.inventarioDeThumbNail.setThumbnail(thumb: thumb, paraLaLLave: cosaADetallar.llaveCosaT)
         dismiss(animated: true, completion: nil)
         self.botonBorrarFoto.isEnabled = true
         self.botonBorrarFoto.tintColor  = #colorLiteral(red: 0.2588235294, green: 0.5215686275, blue: 0.9568627451, alpha: 1)
